@@ -1,0 +1,5 @@
+<span class="glyphicon glyphicon-shopping-cart"></span>
+<span class="caption">
+  {% set count = shopcart.items()|length %}
+  {% if count == 0 %}Корзина{% else %}{{ count }} позиц{{ [ 'ия', 'ии', 'ий' ]|plural(count) }}{% endif %}
+</span>

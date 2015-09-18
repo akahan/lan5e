@@ -1,0 +1,72 @@
+{% extends "layout.html.twig" %}
+
+{% set JS = [ '/assets/js/pages/main.js' ] %}
+
+{% macro item_view(catalog, item) %}
+  {% set item_prices = catalog.get_item_prices(item.catalog_id) %}
+  <div class="col-lg-3">
+    <div class="panel catalog-item {% if item_prices|length > 0 %}presenced{% else %}absenced{% endif %}">
+      <h2>{{ item.group_name }}-{{ "%03d"|format(item.catalog_id) }}</h2>
+      <div class="item-body">
+        <a href="/item/{{ item.catalog_id }}" target="_blank">
+          <img src="/ci/{{ item.catalog_id }}-1.jpg">
+          <div class="caption">{{ item.name }}</div>
+        </a>
+        <div class="price">
+          {% if item_prices|length > 0 %}
+          <a class="prices-popover" role="button" data-trigger="hover" data-toggle="popover">
+            <span id="{{ item.catalog_id }}_price">{{ item_prices[0]['price'] }}</span>&nbsp;<i class="fa fa-rub"></i>
+          </a>
+          {% else %}
+            <span>НЕТ НА СКЛАДЕ</span>
+          {% endif %}
+          <div class="hidden">
+            {% for item_price in item_prices %}
+            <nobr>От {{ item_price.min_amount }} позиций&nbsp;-&nbsp;{{ item_price.price }}</nobr>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="clearfix to_cart">
+        <a class="btn btn-primary pull-right {% if item_prices|length == 0 %}disabled{% endif %}" data-catalog_id="{{ item.catalog_id }}" role="button">
+          <span class="glyphicon glyphicon-shopping-cart"></span> В корзину
+        </a>
+        <input type="text" value="1" class="touchspin" {% if item_prices|length == 0 %}disabled{% endif %}>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% block content %}
+
+<ul id="marking-tab" class="nav nav-tabs">
+  <li class="active"><a data-toggle="cca-page" href="#cca-page">CCA</a></li>
+  <li><a data-toggle="cu-page" href="#cu-page">CU</a></li>
+</ul>
+
+<div class="tab-content catalog">
+  <div id="cca-page" class="tab-pane fade in active">
+
+    <div class="row">
+
+    {% for item in catalog.items()['cca'] %}
+      {{ _self.item_view(catalog, item) }}
+    {% endfor %}
+
+    </div>
+
+  </div>
+  <div id="cu-page" class="tab-pane fade">
+
+    <div class="row">
+
+    {% for item in catalog.items()['cu'] %}
+      {{ _self.item_view(catalog, item) }}
+    {% endfor %}
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
