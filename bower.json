@@ -1,9 +1,0 @@
-{
-  "name": "bootstrap-grunt-bower",
-  "version": "0.0.6",
-  "dependencies": {
-    "bootstrap": "3.3.5",
-    "bootstrap-touchspin": "istvan-ujjmeszaros/bootstrap-touchspin#~3.0.3",
-    "font-awesome": "4.3.0"
-  }
-}

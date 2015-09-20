@@ -2,8 +2,8 @@ log/*
 cache/*
 node_modules/
 bower_components/
-Gruntfile.js  
-bower.json
+./Gruntfile.js  
+./bower.json
 composer.json
 composer.lock
 package.json
