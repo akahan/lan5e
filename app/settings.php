@@ -18,9 +18,9 @@ return [
         ],
 
         'db' => [
-            'dsn'  => 'mysql:host=127.0.0.1;dbname=lan5e',
-            'user' => 'lan5e',
-            'pass' => 'lan5e'
+            'dsn'  => 'mysql:host=lan5e.mysql;dbname=lan5e',
+            'user' => 'lan5e_mysql',
+            'pass' => 'GeThK-1Q'
         ]
     ],
 ];
