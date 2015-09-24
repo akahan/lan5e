@@ -10,4 +10,9 @@ $(function () {
       $('#shopcart-buttons').hide();
       $('#checkout-form').fadeIn();
     });
+
+
+    $('#clear-button').click( function() {
+        $.shopcart.clear();
+    });
 });

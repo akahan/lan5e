@@ -63,4 +63,28 @@ final class Cart extends Controller {
         return $response;
     }
 
+    public function clear($request, $response, $args) {
+
+        Core::$shopcart->clear();
+
+        $answer = [ 'success' => true ];
+
+        $response->withHeader('Content-type', 'application/json');
+        echo json_encode($answer);
+
+        return $response;
+    }
+
+    public function checkout($request, $response, $args) {
+
+        Core::$shopcart->clear();
+
+        $answer = [ 'success' => true ];
+
+        $response->withHeader('Content-type', 'application/json');
+        echo json_encode($answer);
+
+        return $response;
+    }
+
 }

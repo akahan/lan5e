@@ -12,6 +12,7 @@ $(function () {
 
     $('.prices-popover').popover({
         html : true,
+        placement: 'auto',
         content: function() {
             return $(this).next().html();
         }

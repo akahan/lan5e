@@ -8,6 +8,7 @@ use App\Core\Catalog;
 class Shopcart {
 
     private $_items = [];
+    private $_total_sum = 0.00;
 
     public function __construct() {
         $this->_init_from_session(Core::$session->shopcart);
@@ -21,15 +22,30 @@ class Shopcart {
         return count($this->_items);
     }
 
+    public function total_sum() {
+        return $this->_total_sum;
+    }
+
+    public function clear() {
+        $this->_items = [];
+        Core::$session->shopcart = [];
+    }
+
+    public function recalc() {
+        return $this->_total_sum;
+    }
+
     private function _init_from_session($raw_cart) {
         // Core::dump( $raw_cart );
         if ( $raw_cart && is_array($raw_cart) ) {
             foreach ( $raw_cart as $catalog_id => $data ) {
+                $amount = (int) $data['amount'];
+                $price = (float) Catalog::get_item_price( $catalog_id, $this->total_sum() );
                 $this->_items[$catalog_id] = [
-                    'amount' => (int) $data['amount'],
-                    'price'  => 2321.33
-                    // 'price'  => Catalog::get_item_price( $catalog_id, $amount )
+                    'amount' => $amount,
+                    'price'  => $price
                 ];
+                $this->_total_sum += (float) $amount * $price;
             }
         }
     }

@@ -4047,6 +4047,24 @@
             }
         });
     };
+
+    this.clear = function () {
+        bootbox.confirm( "Вы действительно желаете очистить корзину?", function(result) {
+            if (result) {
+
+                $.ajax({
+                    url: "/cart/clear",
+                    method: "POST",
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        window.location.replace("/cart");
+                    }
+                });
+
+            }
+        });
+    };
 }
 
 $(function () {
