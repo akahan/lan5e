@@ -22,6 +22,7 @@ $container['view'] = function ($c) {
     // Add extensions
     $view->addExtension( new Slim\Views\TwigExtension( $c->get('router'), $c->get('request')->getUri()) );
     $view->addExtension( new Twig_Extension_Debug() );
+    $view->addExtension( new Twig_Extensions_Extension_Intl() );
 
     $view->getEnvironment()->addFunction( new Twig_SimpleFunction( 'get_title', function ($catalog_id) {
         return Catalog::get_title($catalog_id);
@@ -79,33 +80,3 @@ $container['App\FO\Controllers\Root'] = function ($c) {
 $container['App\FO\Controllers\Cart'] = function ($c) {
     return new App\FO\Controllers\Cart( $c );
 };
-
-// $container['errorHandler'] = function ($c) use ($app) {
-//   return function ($request, $response, $exception) use ( $c, $app ) {
-//     $data = [
-//       'code' => $exception->getCode(),
-//       'message' => $exception->getMessage(),
-//       'file' => $exception->getFile(),
-//       'line' => $exception->getLine(),
-//       'trace' => explode("\n", $exception->getTraceAsString()),
-//     ];
-
-//     // if ($app['mode'] === 'development') {
-//         // Output exception message
-//         echo $exception->getMessage();
-
-//         // Output stacktrace
-//         debug_print_backtrace();
-
-//     // } else {
-//     //     echo "Something went wrong. We are looking into it.";
-//     //     // PRO TIP: Use a third-party logger here (e.g. Monolog)
-//     // }
-
-//     return $response;
-
-//     // return $c->get('response')->withStatus(500)
-//     //          ->withHeader('Content-Type', 'application/json')
-//     //          ->write(json_encode($data));
-//   };
-// };

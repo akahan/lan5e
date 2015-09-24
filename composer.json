@@ -18,6 +18,7 @@
         "slim/flash": "^0.1.0",
         "akrabat/rka-slim-session-middleware": "dev-master",
         "monolog/monolog": "^1.13",
-        "slim/csrf": "^0.4.0"
+        "slim/csrf": "^0.4.0",
+        "twig/extensions": "^1.3"
     }
 }

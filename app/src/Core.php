@@ -28,12 +28,9 @@ class Core {
 
     public static function sdump($var) {
         ob_start();
-        // echo '<pre>';
         var_dump($var);
-        // echo '</pre>';
         $a = ob_get_contents();
         ob_end_clean();
-        // $a = htmlspecialchars( $a, ENT_QUOTES );
         return $a;
     }
 

@@ -8597,9 +8597,11 @@ button.close {
 body {
   padding-top: 50px;
 }
-.top-logo {
-  background-image: url(/assets/img/logo/web_logo.png);
-  height: 170px;
+.nobr {
+  white-space: nowrap;
+}
+.top-logo img {
+  width: 100%;
 }
 .top-phone {
   font-size: 18px;
@@ -8637,8 +8639,6 @@ body {
 }
 .catalog-item .bootstrap-touchspin {
   width: 110px;
-  float: right;
-  margin-right: 10px;
 }
 .touchspin {
   text-align: center;
@@ -8662,6 +8662,9 @@ body {
 }
 .catalog-item .price i {
   font-size: 24px;
+}
+.catalog-item .price .popup i {
+  font-size: 14px;
 }
 .catalog-item .price a:hover {
   text-decoration: none;
@@ -8690,6 +8693,19 @@ body {
 }
 .shopcart .heading {
   padding: 0 15px;
+}
+#marking-tab a {
+  font-weight: bold;
+  font-size: 20px;
+}
+#marking-tab > li.active > a {
+  color: #337ab7;
+}
+#marking-tab > li > a {
+  color: black;
+}
+.price .popover {
+  min-width: 250px;
 }
 /*********************************************
                     PRODUCTS

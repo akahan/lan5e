@@ -41,7 +41,7 @@ class Catalog {
             SELECT
                 p.`price_group_id`,
                 pg.`name` `price_group_name`,
-                pg.`min_amount`,
+                pg.`min_total`,
                 p.`price`
             FROM
                 `prices` p
@@ -54,27 +54,24 @@ class Catalog {
         return $sth->fetchAll( PDO::FETCH_ASSOC );
     }
 
-    public static function get_item_price($catalog_id, $amount) {
+    public static function get_item_price( $catalog_id, $total_sum ) {
         $sth = Core::$dbh->prepare('
             SELECT
-                p.`price_group_id`,
-                pg.`name` `price_group_name`,
-                pg.`min_amount`,
                 p.`price`
             FROM
                 `prices` p
                 INNER JOIN `price_groups` pg USING(`price_group_id`)
             WHERE
-                p.`catalog_id` = ? AND
-                p.`min_amount` < ?
+                p.`catalog_id` = ? AND ( pg.`min_total` IS NULL OR pg.`min_total` = ?)
             ORDER BY p.`price_group_id`
             LIMIT 1
         ');
 
-        $sth->execute( [ $catalog_id, $amount ] );
-        $data = $sth->fetch( PDO::FETCH_ASSOC );
-        var_dump($data);
-        return $data;
+        // var_dump( [ $catalog_id, $total_sum ] );
+        $sth->execute( [ $catalog_id, $total_sum ] );
+        $price = $sth->fetch( PDO::FETCH_OBJ )->price;
+        // var_dump($price);
+        return $price;
     }
 
     public static function get_title($catalog_id) {
